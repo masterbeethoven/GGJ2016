@@ -3,7 +3,7 @@ using System.Collections;
 
 public class WindowScript : MonoBehaviour {
 	public Transform prefab;
-	bool spriteActive = true;
+	public bool spriteActive = true;
 	int prefabLimit = 10;
 	public int prefabCount; 
 	// Use this for initialization
@@ -29,7 +29,18 @@ public class WindowScript : MonoBehaviour {
 			this.spriteActive = false; 
 			//CancelInvoke("prefab");
 		}
-		
 	
+		OnMouseDrag();
+
+	}
+
+	void OnMouseDrag() {
+		
+		if (Input.GetMouseButton(0) && this.spriteActive) {
+			Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10f);
+			Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint);
+			transform.position = curPosition;
+		}
+
 	}
 }
